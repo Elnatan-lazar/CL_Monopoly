@@ -39,10 +39,9 @@ LocType Location::getType() const { return _type; }
 Player *const Location::getOwner() const { return _owner; }
 
 // Setter methods
-void Location::setID(int id) { _id = id; }
-void Location::setName(const std::string &new_name) { _name = new_name; }
+
 void Location::setOwner(Player* player) { _owner = player; }
-void Location::setColour(sf::Color new_colour) { _color = new_colour; }
+
 
 // Buying houses and hotels
 bool Location::buyHouse() {

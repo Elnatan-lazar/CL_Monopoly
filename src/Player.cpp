@@ -91,21 +91,9 @@ void Player::resetProperties() {
     propertiesOwned.clear();
 }
 
-// Display player properties
-std::string Player::displayProperties() const {
-    if (propertiesOwned.empty()) {
-        return "NO PROPERTY TO SHOW";
-    }
 
-    std::string result;
-    for (const auto& property : propertiesOwned) {
-        result += property->getName() + "\n";
-    }
-    return result;
-}
 
 // Position methods
-int Player::getPosition() const { return position; }
 void Player::setPosition(int pos) { position = pos; }
 
 void Player::move(int i, Board &board) {

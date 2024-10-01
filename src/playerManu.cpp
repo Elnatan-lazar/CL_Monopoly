@@ -603,48 +603,80 @@ void BankruptByPlayer(Player *CurrentPlayer,Player* owner) {
 
 }
 
-int PlayerResults(vector<Player>& players)
-{
-    cout <<"\n";
-    cout <<"\n                                                 8888888b.  8888888888 .d8888b.  888     888 888    88888888888 .d8888b.  ";
-    cout <<"\n                                                 888   Y88b 888       d88P  Y88b 888     888 888        888    d88P  Y88b ";
-    cout <<"\n                                                 888    888 888       Y88b.      888     888 888        888    Y88b.      ";
-    cout <<"\n                                                 888   d88P 8888888    \"Y888b.   888     888 888        888     \"Y888b.   ";
-    cout <<"\n                                                 8888888P\"  888           \"Y88b. 888     888 888        888        \"Y88b. ";
-    cout <<"\n                                                 888 T88b   888             \"888 888     888 888        888          \"888 ";
-    cout <<"\n                                                 888  T88b  888       Y88b  d88P Y88b. .d88P 888        888    Y88b  d88P ";
-    cout <<"\n                                                 888   T88b 8888888888 \"Y8888P\"   \"Y88888P\"  88888888   888     \"Y8888P\"  ";
-    cout <<"\n\n\n\n\n";
-    int len=0;
-    for (int i=0;i<players.size();i++) {
-        if (len < players[i].getName().length()) {
-            len = players[i].getName().length();
-        }
-    }
-    std::sort(players.begin(), players.end(), []( Player& a,  Player& b) {
-        if (a.isBankrupct() == b.isBankrupct()) {
-            if (!a.isBankrupct()) {
-                return a.getCashInHand() > b.getCashInHand(); // Sort by cash in descending order if both are still alive
-            } else {
-                return a.getPosition() < b.getPosition(); // Sort by position in ascending order if both are out
-            }
-        }
-        return !a.isBankrupct(); // Sort alive players (isBankrupct == false) before out players
-    });
-    std::cout << "\n\t\t"
-              << std::setw(9) << "POSITION"
-              << "     " << std::setw(len) << std::left << "PLAYER NAME"
-              << "     " << std::setw(13) << std::right << "CASH IN HAND"
-              << "     " << std::setw(9) << "NET WORTH"
-              << std::endl;
+bool checkAndDisplayWinner(std::vector<Player>& players, sf::RenderWindow &window, sf::Font &font) {
 
-    for ( auto& player : players) {
-        std::cout << "\t\t"
-                  << std::setw(9) << player.getPosition()
-                  << "     " << std::setw(len) << std::left << player.getName()
-                  << "     " << std::setw(13) << std::right << player.getCashInHand()
-                  << "     " << std::setw(9) << player.getNetWorth()
-                  << std::endl;
+
+    // Create a background for the results display
+    sf::RectangleShape background(sf::Vector2f(window.getSize().x, window.getSize().y));
+    background.setFillColor(sf::Color(50, 50, 50, 200));
+
+    // Check if a player has won by reaching $4000
+    for (const auto& player : players) {
+        if (player.getCashInHand() >= 4000) {
+            // Clear the window and display the results
+            // Sort players by their cash in hand in descending order
+            std::sort(players.begin(), players.end(), [](const Player& a, const Player& b) {
+                return a.getCashInHand() > b.getCashInHand();
+            });
+            window.clear();
+            window.draw(background);
+
+            sf::Text winnerText("Congratulations " + player.getName() + "! You have reached $4000 and won the game!", font, 30);
+            winnerText.setFillColor(sf::Color::White);
+            winnerText.setPosition((window.getSize().x - winnerText.getGlobalBounds().width) / 2, 50);
+            window.draw(winnerText);
+
+            // Display the final standings
+            for (size_t i = 0; i < players.size(); ++i) {
+                sf::Text playerText(std::to_string(i + 1) + ". " + players[i].getName() + " - Cash: $" + std::to_string(players[i].getCashInHand()), font, 24);
+                playerText.setFillColor(sf::Color::White);
+                playerText.setPosition(100, 120 + i * 40); // Adjust position as needed
+                window.draw(playerText);
+            }
+
+            window.display();
+            sf::sleep(sf::seconds(5));  // Display the results for 5 seconds
+            return true;
+        }
     }
-    return EXIT_SUCCESS;
+
+    // Check if only one player is not bankrupt
+    int activePlayers = 0;
+    Player* lastActivePlayer = nullptr;
+    for (auto& player : players) {
+        if (!player.isBankrupct()) {
+            activePlayers++;
+            lastActivePlayer = &player;
+        }
+    }
+
+    if (activePlayers == 1 && lastActivePlayer != nullptr) {
+        // Sort players by their cash in hand in descending order
+        std::sort(players.begin(), players.end(), [](const Player& a, const Player& b) {
+            return a.getCashInHand() > b.getCashInHand();
+        });
+        // Clear the window and display the results
+        window.clear();
+        window.draw(background);
+
+        sf::Text winnerText("Congratulations " + lastActivePlayer->getName() + "! You are the last player standing and have won the game!", font, 30);
+        winnerText.setFillColor(sf::Color::White);
+        winnerText.setPosition((window.getSize().x - winnerText.getGlobalBounds().width) / 2, 50);
+        window.draw(winnerText);
+
+        // Display the final standings
+        for (size_t i = 0; i < players.size(); ++i) {
+            sf::Text playerText(std::to_string(i + 1) + ". " + players[i].getName() + " - Cash: $" + std::to_string(players[i].getCashInHand()), font, 24);
+            playerText.setFillColor(sf::Color::White);
+            playerText.setPosition(100, 120 + i * 40); // Adjust position as needed
+            window.draw(playerText);
+        }
+
+        window.display();
+        sf::sleep(sf::seconds(5));  // Display the results for 5 seconds
+        return true;
+    }
+
+
+    return false;
 }

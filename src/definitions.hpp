@@ -25,48 +25,7 @@
 #include <conio.h>
 #endif
 
-#define clearScreen() system("@cls||clear")
-#define goto_XY(X, Y) printf("%c[%d;%df", 0x1B, Y, X)
-#define hideCursor() printf("\e[?25l")
-#define showCursor() printf("\e[?25h")
-#define colour(C1, C2) printf("\033[%d;%dm", C2, C1)
 
-
-enum colours
-{
-    RESET,
-    INCREASED_INTENSITY,
-    BLACK = 30,
-    RED,
-    GREEN,
-    YELLOW,
-    BLUE,
-    PURPLE,
-    CYAN,
-    WHITE,
-    RED_BG = 41,
-    GREEN_BG,
-    YELLOW_BG,
-    BLUE_BG,
-    PURPLE_BG,
-    CYAN_BG,
-    WHITE_BG,
-    LIGHTBLACK_BG = 100,
-    LIGHTRED_BG,
-    LIGHTGREEN_BG,
-    LIGHTYELLOW_BG,
-    LIGHTBLUE_BG,
-    LIGHTPURPLE_BG,
-    LIGHTCYAN_BG,
-    PUREWHITE_BG
-};
-enum GameMode
-{
-    NETWORTH,
-    TURNS,
-    ENDLESS,
-    EXIT
-};
 
 enum LocType
 {
@@ -85,18 +44,8 @@ enum CardType
     NEUTRAL,
     GOOD
 };
-enum MainMenu
-{
-    ROLL,
-    BUY,
-    SELL,
-    GIVEUP
-};
 
-// Structure containing location information
-                      // Locations read from csv file
 
-// Structure containing card information
 
 
 #endif

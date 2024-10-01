@@ -12,31 +12,19 @@ private:
 
 public:
     // Constructor initializes random number generator
-    Dice() : rng(std::random_device{}()) {
-        die1 = die2 = 0;
-    }
+    Dice() ;
 
     // Roll both dice and return the total
-    int roll() {
-        std::uniform_int_distribution<std::mt19937::result_type> dist(1, 6); // Rolling between 1 and 6
-        die1 = dist(rng);
-        die2 = dist(rng);
-
-        return die1 + die2;  // Return the sum of both dice
-    }
+    int roll();
 
     // Get individual dice values
-    int getDie1() const { return die1; }
-    int getDie2() const { return die2; }
-    int getRoll() const { return die1+die2; }
-    bool isDouble(){
-        return  die1==die2;
-    }
+    int getDie1() const ;
+    int getDie2() const ;
+    int getRoll() const ;
+    bool isDouble();
 
     // Print dice results
-    void printRoll() const {
-        std::cout << "rolled: " << die1 << " and " << die2 << " (Total: " << (die1 + die2) << ")" << std::endl;
-    }
+    void printRoll() const ;
 };
 
 #endif // DICE_HPP

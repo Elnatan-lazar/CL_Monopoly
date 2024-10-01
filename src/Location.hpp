@@ -45,10 +45,9 @@ public:
     Player *const getOwner() const;
     LocType getType() const;
 
-    void setID(int id);
-    void setName(const std::string &new_name);
+
     void setOwner(Player* player);
-    void setColour(sf::Color new_colour);
+
 
     bool buyHotel();
     bool buyHouse();

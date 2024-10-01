@@ -120,15 +120,7 @@ void ShowRules( sf::RenderWindow &window, sf::Font &font) {
 }
 
 
-int checkForWinner(const std::vector<Player>& players) {
-    for (const auto& player : players) {
-        if (player.getNetWorth() >= 4000) {
-            std::cout << player.getName() << " has reached $4000 and wins the game!" << std::endl;
-            return player.getID()-1; // return the index of the winning player
-        }
-    }
-    return -1;
-}
+
 
 
 
@@ -183,7 +175,7 @@ void mainGame(sf::RenderWindow &window, sf::Font &font) {
     bool hasRolledDice = false;
     int doubleRollCount = 0;  // Track consecutive doubles
     std::string rollResultMessage = " ";  // To display the dice result message
-
+    int postion=players.size();
     // Main game loop
     while (window.isOpen()) {
         sf::Event event;
@@ -270,6 +262,9 @@ void mainGame(sf::RenderWindow &window, sf::Font &font) {
                     }
                     if (sellButton.getGlobalBounds().contains(mousePos)) {
                         sellMenu(players[currentPlayerIndex], window, font, gameBoard, players);
+                    }
+                    if (buyHouseButton.getGlobalBounds().contains(mousePos)) {
+                        buyHouse(players[currentPlayerIndex], window, font);
                     }
 
                 }
@@ -363,6 +358,17 @@ void mainGame(sf::RenderWindow &window, sf::Font &font) {
 
         // Display all elements
         window.display();
+        if(players[currentPlayerIndex].isBankrupct()){
+            players[currentPlayerIndex].setPosition(postion--);//update the  position of the player
+            players[currentPlayerIndex].setTempMessage("");
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+            while (players[currentPlayerIndex].isBankrupct()) {
+                currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+            }
+        }
+        if (checkAndDisplayWinner(players, window, font)) { // if there is a winner finish the game
+            return ;
+        }
     }
 }
 

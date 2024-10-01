@@ -28,7 +28,7 @@ void buyHouse(Player& currentPlayer,sf::RenderWindow& window, sf::Font& font);
 
 void showPropertiesWindow(Player &player, sf::Font &font);
 
-int checkForWinner(const std::vector<Player>& players);
+
 
 
 sf::Text createText(const sf::Font &font, const std::string &str, unsigned int size, sf::Color color, float x, float y);

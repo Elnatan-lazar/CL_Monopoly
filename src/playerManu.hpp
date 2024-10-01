@@ -42,7 +42,7 @@ void BuyMenu(Player* currentPlayer, std::shared_ptr<Location> currentLocation, s
 
 // Shows leaderboards post game
 // Returns EXIT_SUCCESS on successful display
-int PlayerResults(std::vector<Player>& players);
+bool checkAndDisplayWinner(std::vector<Player>& players, sf::RenderWindow &window, sf::Font &font);
 
 
 void BankruptByPlayer(Player *CurrentPlayer, Player* owner);

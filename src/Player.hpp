@@ -62,11 +62,8 @@ public:
     bool ownsCompleteSet(sf::Color color) const;  // Check if the player owns a complete set of a color
     void resetProperties();
 
-    // Display methods
-    std::string displayProperties() const;
 
-    // Position management
-    int getPosition() const;
+
     void setPosition(int pos);
 
     void move(int i, Board &board);
