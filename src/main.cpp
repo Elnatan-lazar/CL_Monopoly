@@ -84,6 +84,7 @@ int main()
                     if (playButton.getGlobalBounds().contains(mousePos))
                     {
                         mainGame(window, font);
+                        return  1;
                     }
                     else if (rulesButton.getGlobalBounds().contains(mousePos))
                     {

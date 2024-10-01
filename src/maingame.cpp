@@ -143,7 +143,18 @@ void mainGame(sf::RenderWindow &window, sf::Font &font) {
         player.setCurrentLocation(gameBoard.getLocations()[0]);
     }
     gameBoard.getLocations()[1]->setOwner(&players[0]);
-    gameBoard.getLocations()[1]->buyHouse();
+    gameBoard.getLocations()[3]->setOwner(&players[0]);
+
+    Location* location = gameBoard.getLocations()[1].get();
+    Location* location2 = gameBoard.getLocations()[3].get();
+//    location->buyHouse();
+//    location2->buyHouse();
+//    location->buyHouse();
+//    location2->buyHouse();
+//    location->buyHouse();
+//    location2->buyHouse();
+//    location->buyHouse();
+//    location2->buyHouse();
     gameBoard.drawPlayerMarkers(window, players);
 
     // Button and Text Initialization
@@ -171,6 +182,11 @@ void mainGame(sf::RenderWindow &window, sf::Font &font) {
     sf::Text sellButtonText = createText(font, "Sell", 20, sf::Color::White, sidebar.getPosition().x + 50, 450);
     sellButton.setPosition(sidebar.getPosition().x + 50, 450);
     sellButton.setFillColor(sf::Color::Magenta);
+
+    sf::RectangleShape exitButton(sf::Vector2f(250, 50));
+    sf::Text exitButtonText = createText(font, "exit", 20, sf::Color::Red, sidebar.getPosition().x + 50, 720);
+    exitButton.setPosition(sidebar.getPosition().x + 50, 720);
+    exitButton.setFillColor(sf::Color::Black);
     // Variables to track dice rolls and doubles
     bool hasRolledDice = false;
     int doubleRollCount = 0;  // Track consecutive doubles
@@ -304,6 +320,10 @@ void mainGame(sf::RenderWindow &window, sf::Font &font) {
                 if (showPropertiesButton.getGlobalBounds().contains(mousePos)) {
                     showPropertiesWindow(players[currentPlayerIndex], font);
                 }
+                if (exitButton.getGlobalBounds().contains(mousePos)) {
+
+                    return;
+                }
             }
         }
 
@@ -330,6 +350,8 @@ void mainGame(sf::RenderWindow &window, sf::Font &font) {
         window.draw(endTurnText);
         window.draw(sellButton);
         window.draw(sellButtonText);
+        window.draw(exitButton);
+        window.draw(exitButtonText);
 
 
         // Display the roll result message

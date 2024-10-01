@@ -17,7 +17,7 @@ Location::Location(int id, LocType type, const std::string &name, sf::Color colo
 // Constructor for property locations with full details
 Location::Location(int id, LocType type, const std::string &name, sf::Color color, int cost, int baseRent, int buildCost, int hotelRent, int hotelCost)
         : _id(id), _name(name), _cost(cost), _type(type), _color(color), _baseRent(baseRent),
-          _houseCost(buildCost), _hotelRent(hotelRent), _hotelCost(hotelCost), _owner(nullptr) {}
+          _houseCost(buildCost), _hotelRent(hotelRent), _hotelCost(hotelCost), _owner(nullptr),_houseCount(0) {}
 
 // Getter methods
 int Location::getCost() const { return _cost; }
@@ -94,7 +94,8 @@ bool Location::canBuildHouse() {
 
     // Check house build rule
     int minHouseCount = getMinHouseCountInSet();
-    if (_houseCount == minHouseCount) {
+
+    if ((_houseCount-minHouseCount)<=0) {
         return true;
     }
     std::cout << "Cannot build house: other properties in the set must have " << minHouseCount + 1 << " houses first." << std::endl;
@@ -136,7 +137,7 @@ bool Location::hasCompleteSet() const {
 }
 
 int Location::getMinHouseCountInSet() const {
-    int minHouseCount = 0x7fffffff;
+    int minHouseCount = 1000;
     for (const auto& loc : _sameColorLocations) {
         if (loc->getHouseCount() < minHouseCount) {
             minHouseCount = loc->getHouseCount();

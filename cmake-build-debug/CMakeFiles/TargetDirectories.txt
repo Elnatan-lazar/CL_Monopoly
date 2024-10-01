@@ -1,3 +1,4 @@
 C:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/cmake-build-debug/CMakeFiles/CL_Monopoly.dir
+C:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/cmake-build-debug/CMakeFiles/CL_Monopoly_tests.dir
 C:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/cmake-build-debug/CMakeFiles/rebuild_cache.dir

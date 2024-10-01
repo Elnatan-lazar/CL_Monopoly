@@ -15,7 +15,8 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -30,7 +31,8 @@
 					"name" : "CL_Monopoly",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -41,6 +43,13 @@
 					"id" : "CL_Monopoly::@6890427a1f51a3e7e1df",
 					"jsonFile" : "target-CL_Monopoly-Debug-d17412cf91b83b0c574f.json",
 					"name" : "CL_Monopoly",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "CL_Monopoly_tests::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-CL_Monopoly_tests-Debug-c87ca0985c164d14851f.json",
+					"name" : "CL_Monopoly_tests",
 					"projectIndex" : 0
 				}
 			]

@@ -137,6 +137,103 @@ build CL_Monopoly.exe: CXX_EXECUTABLE_LINKER__CL_Monopoly_Debug CMakeFiles/CL_Mo
   TARGET_IMPLIB = libCL_Monopoly.dll.a
   TARGET_PDB = CL_Monopoly.exe.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target CL_Monopoly_tests
+
+
+#############################################
+# Order-only phony target for CL_Monopoly_tests
+
+build cmake_object_order_depends_target_CL_Monopoly_tests: phony || CMakeFiles/CL_Monopoly_tests.dir
+
+build CMakeFiles/CL_Monopoly_tests.dir/src/Location.cpp.obj: CXX_COMPILER__CL_Monopoly_tests_unscanned_Debug C$:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src/Location.cpp || cmake_object_order_depends_target_CL_Monopoly_tests
+  DEP_FILE = CMakeFiles\CL_Monopoly_tests.dir\src\Location.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src -isystem C:/SFML/include
+  OBJECT_DIR = CMakeFiles\CL_Monopoly_tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\CL_Monopoly_tests.dir\src
+
+build CMakeFiles/CL_Monopoly_tests.dir/src/Player.cpp.obj: CXX_COMPILER__CL_Monopoly_tests_unscanned_Debug C$:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src/Player.cpp || cmake_object_order_depends_target_CL_Monopoly_tests
+  DEP_FILE = CMakeFiles\CL_Monopoly_tests.dir\src\Player.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src -isystem C:/SFML/include
+  OBJECT_DIR = CMakeFiles\CL_Monopoly_tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\CL_Monopoly_tests.dir\src
+
+build CMakeFiles/CL_Monopoly_tests.dir/src/Dice.cpp.obj: CXX_COMPILER__CL_Monopoly_tests_unscanned_Debug C$:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src/Dice.cpp || cmake_object_order_depends_target_CL_Monopoly_tests
+  DEP_FILE = CMakeFiles\CL_Monopoly_tests.dir\src\Dice.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src -isystem C:/SFML/include
+  OBJECT_DIR = CMakeFiles\CL_Monopoly_tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\CL_Monopoly_tests.dir\src
+
+build CMakeFiles/CL_Monopoly_tests.dir/src/maingame.cpp.obj: CXX_COMPILER__CL_Monopoly_tests_unscanned_Debug C$:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src/maingame.cpp || cmake_object_order_depends_target_CL_Monopoly_tests
+  DEP_FILE = CMakeFiles\CL_Monopoly_tests.dir\src\maingame.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src -isystem C:/SFML/include
+  OBJECT_DIR = CMakeFiles\CL_Monopoly_tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\CL_Monopoly_tests.dir\src
+
+build CMakeFiles/CL_Monopoly_tests.dir/src/Board.cpp.obj: CXX_COMPILER__CL_Monopoly_tests_unscanned_Debug C$:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src/Board.cpp || cmake_object_order_depends_target_CL_Monopoly_tests
+  DEP_FILE = CMakeFiles\CL_Monopoly_tests.dir\src\Board.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src -isystem C:/SFML/include
+  OBJECT_DIR = CMakeFiles\CL_Monopoly_tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\CL_Monopoly_tests.dir\src
+
+build CMakeFiles/CL_Monopoly_tests.dir/src/playerManu.cpp.obj: CXX_COMPILER__CL_Monopoly_tests_unscanned_Debug C$:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src/playerManu.cpp || cmake_object_order_depends_target_CL_Monopoly_tests
+  DEP_FILE = CMakeFiles\CL_Monopoly_tests.dir\src\playerManu.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src -isystem C:/SFML/include
+  OBJECT_DIR = CMakeFiles\CL_Monopoly_tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\CL_Monopoly_tests.dir\src
+
+build CMakeFiles/CL_Monopoly_tests.dir/src/Card.cpp.obj: CXX_COMPILER__CL_Monopoly_tests_unscanned_Debug C$:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src/Card.cpp || cmake_object_order_depends_target_CL_Monopoly_tests
+  DEP_FILE = CMakeFiles\CL_Monopoly_tests.dir\src\Card.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src -isystem C:/SFML/include
+  OBJECT_DIR = CMakeFiles\CL_Monopoly_tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\CL_Monopoly_tests.dir\src
+
+build CMakeFiles/CL_Monopoly_tests.dir/src/definitions.cpp.obj: CXX_COMPILER__CL_Monopoly_tests_unscanned_Debug C$:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src/definitions.cpp || cmake_object_order_depends_target_CL_Monopoly_tests
+  DEP_FILE = CMakeFiles\CL_Monopoly_tests.dir\src\definitions.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src -isystem C:/SFML/include
+  OBJECT_DIR = CMakeFiles\CL_Monopoly_tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\CL_Monopoly_tests.dir\src
+
+build CMakeFiles/CL_Monopoly_tests.dir/src/action.cpp.obj: CXX_COMPILER__CL_Monopoly_tests_unscanned_Debug C$:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src/action.cpp || cmake_object_order_depends_target_CL_Monopoly_tests
+  DEP_FILE = CMakeFiles\CL_Monopoly_tests.dir\src\action.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src -isystem C:/SFML/include
+  OBJECT_DIR = CMakeFiles\CL_Monopoly_tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\CL_Monopoly_tests.dir\src
+
+build CMakeFiles/CL_Monopoly_tests.dir/src/test.cpp.obj: CXX_COMPILER__CL_Monopoly_tests_unscanned_Debug C$:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src/test.cpp || cmake_object_order_depends_target_CL_Monopoly_tests
+  DEP_FILE = CMakeFiles\CL_Monopoly_tests.dir\src\test.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/src -isystem C:/SFML/include
+  OBJECT_DIR = CMakeFiles\CL_Monopoly_tests.dir
+  OBJECT_FILE_DIR = CMakeFiles\CL_Monopoly_tests.dir\src
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target CL_Monopoly_tests
+
+
+#############################################
+# Link the executable CL_Monopoly_tests.exe
+
+build CL_Monopoly_tests.exe: CXX_EXECUTABLE_LINKER__CL_Monopoly_tests_Debug CMakeFiles/CL_Monopoly_tests.dir/src/Location.cpp.obj CMakeFiles/CL_Monopoly_tests.dir/src/Player.cpp.obj CMakeFiles/CL_Monopoly_tests.dir/src/Dice.cpp.obj CMakeFiles/CL_Monopoly_tests.dir/src/maingame.cpp.obj CMakeFiles/CL_Monopoly_tests.dir/src/Board.cpp.obj CMakeFiles/CL_Monopoly_tests.dir/src/playerManu.cpp.obj CMakeFiles/CL_Monopoly_tests.dir/src/Card.cpp.obj CMakeFiles/CL_Monopoly_tests.dir/src/definitions.cpp.obj CMakeFiles/CL_Monopoly_tests.dir/src/action.cpp.obj CMakeFiles/CL_Monopoly_tests.dir/src/test.cpp.obj | C$:/SFML/lib/libsfml-graphics-d.a C$:/SFML/lib/libsfml-network-d.a C$:/SFML/lib/libsfml-audio-d.a C$:/SFML/lib/libsfml-window-d.a C$:/SFML/lib/libsfml-system-d.a
+  FLAGS = -g
+  LINK_LIBRARIES = C:/SFML/lib/libsfml-graphics-d.a  C:/SFML/lib/libsfml-network-d.a  C:/SFML/lib/libsfml-audio-d.a  C:/SFML/lib/libsfml-window-d.a  C:/SFML/lib/libsfml-system-d.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\CL_Monopoly_tests.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = CL_Monopoly_tests.exe
+  TARGET_IMPLIB = libCL_Monopoly_tests.dll.a
+  TARGET_PDB = CL_Monopoly_tests.exe.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -165,6 +262,8 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 build CL_Monopoly: phony CL_Monopoly.exe
 
+build CL_Monopoly_tests: phony CL_Monopoly_tests.exe
+
 # =============================================================================
 # Folder targets.
 
@@ -173,7 +272,7 @@ build CL_Monopoly: phony CL_Monopoly.exe
 #############################################
 # Folder: C:/Users/elnatan/CLionProjects/CL_Monopoly_smfl/cmake-build-debug
 
-build all: phony CL_Monopoly.exe
+build all: phony CL_Monopoly.exe CL_Monopoly_tests.exe
 
 # =============================================================================
 # Built-in targets

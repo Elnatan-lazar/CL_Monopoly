@@ -15,14 +15,17 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
     <option name="majorVersion" value="2023" />
     <option name="minorVersion" value="3.6" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2mpcR5szdIzpXZ81X5j320bCv2A" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -36,6 +39,7 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "master",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -49,6 +53,7 @@
       <option name="presentableId" value="Default" />
       <updated>1727776947090</updated>
       <workItem from="1727776948696" duration="18000" />
+      <workItem from="1727811660239" duration="13000" />
     </task>
     <servers />
   </component>

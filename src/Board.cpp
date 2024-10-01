@@ -145,8 +145,22 @@ void Board::draw(sf::RenderWindow &window) {
 
             if (locations[i]->hasHotel()) {
                 houseHotelDisplay = "#";  // Display hotel as '#'
-            } else {
-                houseHotelDisplay = std::string(locations[i]->getHouseCount(), '*');  // Display houses as '*'
+            } else {   // Display houses as '*'
+                switch (locations[i]->getHouseCount()) {
+                    case 1:
+                        houseHotelDisplay = std::string(locations[i]->getHouseCount(), '*');
+                        break;
+                    case 2:
+                        houseHotelDisplay = std::string(locations[i]->getHouseCount(), '**');
+                        break;
+                    case 3:
+                        houseHotelDisplay = std::string(locations[i]->getHouseCount(), '***');
+                        break;
+                    default:
+                        houseHotelDisplay = std::string(locations[i]->getHouseCount(), '****');
+                        break;
+                }
+
             }
 
             // Set up sf::Text to display the house/hotel marks
