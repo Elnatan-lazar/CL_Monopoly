@@ -436,158 +436,154 @@ void showPropertiesWindow(Player &player, sf::Font &font) {
 
 
 void buyHouse(Player &currentPlayer, sf::RenderWindow &window, sf::Font &font) {
-    // Set up the Buy House/Hotel menu window
-    sf::RenderWindow menuWindow(sf::VideoMode(600, 600), "Buy House/Hotel");
-
-    // Menu items
-    sf::Text titleText = createText(font, "Buy House/Hotel Menu", 24, sf::Color::White, 20, 20);
-    sf::Text instructionText = createText(font, "Select a property index to build:", 18, sf::Color::White, 20, 60);
-
-    std::vector<std::shared_ptr<Location>> properties = currentPlayer.getPropertiesOwned();
+    // Filter properties that belong to complete sets and are owned by the current player
     std::vector<std::shared_ptr<Location>> eligibleProperties;
-
-    // Gather only the eligible properties with complete sets of the same color and of street type
-    for (auto &property : properties) {
+    for (auto &property : currentPlayer.getPropertiesOwned()) {
         if (property->getType() == PROPERTY && currentPlayer.ownsCompleteSet(property->getColor())) {
             eligibleProperties.push_back(property);
         }
     }
 
+    if (eligibleProperties.empty()) {
+        // Display message if no eligible properties
+        sf::Text noPropertiesText("No eligible properties to build on.", font, 24);
+        noPropertiesText.setFillColor(sf::Color::Red);
+        noPropertiesText.setPosition((window.getSize().x - noPropertiesText.getGlobalBounds().width) / 2, (window.getSize().y - noPropertiesText.getGlobalBounds().height) / 2);
+        window.clear();
+        window.draw(noPropertiesText);
+        window.display();
+        sf::sleep(sf::seconds(2)); // Display the message for 2 seconds
+        return;
+    }
+
+    // Create an overlay for the menu
+    sf::RectangleShape overlay(sf::Vector2f(800, 600));
+    overlay.setFillColor(sf::Color(255, 255, 255, 200)); // Semi-transparent white background
+    overlay.setPosition((window.getSize().x - 800) / 2, (window.getSize().y - 600) / 2);
+
+    // Display property list
     std::vector<sf::Text> propertyTexts;
     for (size_t i = 0; i < eligibleProperties.size(); ++i) {
-        sf::Text propText = createText(font, std::to_string(i + 1) + " - " + eligibleProperties[i]->getName(), 18, sf::Color::White, 20, 100 + static_cast<float>(i) * 30);
+        sf::Text propText = createText(font, eligibleProperties[i]->getName() + " - $" + std::to_string(eligibleProperties[i]->getCost()), 20, sf::Color::Black, overlay.getPosition().x + 20, overlay.getPosition().y + 50 + static_cast<float>(i) * 30);
         propertyTexts.push_back(propText);
     }
 
-    sf::Text exitButtonText = createText(font, "Exit", 20, sf::Color::White, 500, 550);
-    sf::RectangleShape exitButton(sf::Vector2f(80, 40));
-    exitButton.setPosition(500, 550);
+    // Create Exit Button
+    sf::RectangleShape exitButton(sf::Vector2f(150, 40));
     exitButton.setFillColor(sf::Color::Red);
+    exitButton.setPosition(overlay.getPosition().x + 620, overlay.getPosition().y + 520);
 
-    // Input for property index selection
-    sf::Text inputPrompt = createText(font, "Enter property index:", 18, sf::Color::White, 20, 450);
-    sf::Text inputFeedback = createText(font, "", 18, sf::Color::White, 20, 480);
-    std::string input;
-    bool validInput = false;
-    int selectedPropertyIndex = -1;
+    sf::Text exitButtonText("Exit", font, 20);
+    exitButtonText.setFillColor(sf::Color::White);
+    exitButtonText.setPosition(exitButton.getPosition().x + (exitButton.getSize().x - exitButtonText.getGlobalBounds().width) / 2, exitButton.getPosition().y + 5);
 
-    // Button for choosing house/hotel
-    sf::Text chooseHouseText = createText(font, "Choose House", 20, sf::Color::White, 200, 520);
-    sf::RectangleShape chooseHouseButton(sf::Vector2f(120, 40));
-    chooseHouseButton.setPosition(200, 520);
-    chooseHouseButton.setFillColor(sf::Color::Blue);
+    // Create the buy house/hotel and cancel buttons
+    sf::RectangleShape buyHouseButton(sf::Vector2f(150, 40));
+    sf::RectangleShape buyHotelButton(sf::Vector2f(150, 40));
+    sf::RectangleShape cancelButton(sf::Vector2f(150, 40));
 
-    sf::Text chooseHotelText = createText(font, "Choose Hotel", 20, sf::Color::White, 350, 520);
-    sf::RectangleShape chooseHotelButton(sf::Vector2f(120, 40));
-    chooseHotelButton.setPosition(350, 520);
-    chooseHotelButton.setFillColor(sf::Color::Blue);
+    sf::Text buyHouseText("Buy House", font, 20);
+    sf::Text buyHotelText("Buy Hotel", font, 20);
+    sf::Text cancelText("Cancel", font, 20);
 
-    bool isChoosingProperty = true;
+    bool selectingProperty = true;
+    int selectedIndex = -1;
 
-    // Menu loop
-    while (menuWindow.isOpen()) {
+    // Main loop for the buy menu
+    while (window.isOpen() && selectingProperty) {
         sf::Event event;
-        while (menuWindow.pollEvent(event)) {
+        while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
-                menuWindow.close();
+                window.close();
                 return;
             }
 
             if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-                sf::Vector2f mousePos = menuWindow.mapPixelToCoords(sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
+                sf::Vector2f mousePos = window.mapPixelToCoords(sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
 
                 // Check if the exit button is clicked
                 if (exitButton.getGlobalBounds().contains(mousePos)) {
-                    std::cout << "Exiting buy menu." << std::endl;
-                    menuWindow.close();
+                    window.clear();
                     return;
                 }
 
-                // Check if the Choose House button is clicked
-                if (chooseHouseButton.getGlobalBounds().contains(mousePos) && validInput) {
-                    std::cout << "Player chose to buy a house for property: " << eligibleProperties[selectedPropertyIndex]->getName() << std::endl;
-                    if (eligibleProperties[selectedPropertyIndex]->buyHouse()) {
-                        currentPlayer.updateCashInHand(-eligibleProperties[selectedPropertyIndex]->getHouseCost());
-                        std::cout << "House purchased for " << eligibleProperties[selectedPropertyIndex]->getName() << std::endl;
-                        menuWindow.close();
-                        return;
-                    } else {
-                        inputFeedback.setString("Cannot buy house. Maximum houses reached.");
+                // Check if a property was clicked
+                for (size_t i = 0; i < propertyTexts.size(); ++i) {
+                    if (propertyTexts[i].getGlobalBounds().contains(mousePos)) {
+                        selectedIndex = i;
+                        selectingProperty = false;
+
+                        // Set up buttons for buying house/hotel
+                        buyHouseButton.setPosition(overlay.getPosition().x + 20, overlay.getPosition().y + 500);
+                        buyHotelButton.setPosition(overlay.getPosition().x + 200, overlay.getPosition().y + 500);
+                        cancelButton.setPosition(overlay.getPosition().x + 380, overlay.getPosition().y + 500);
+
+                        buyHouseButton.setFillColor(sf::Color::Green);
+                        buyHotelButton.setFillColor(sf::Color::Blue);
+                        cancelButton.setFillColor(sf::Color::Yellow);
+
+                        buyHouseText.setPosition(buyHouseButton.getPosition().x + 20, buyHouseButton.getPosition().y + 5);
+                        buyHotelText.setPosition(buyHotelButton.getPosition().x + 20, buyHotelButton.getPosition().y + 5);
+                        cancelText.setPosition(cancelButton.getPosition().x + 20, cancelButton.getPosition().y + 5);
                     }
                 }
 
-                // Check if the Choose Hotel button is clicked
-                if (chooseHotelButton.getGlobalBounds().contains(mousePos) && validInput) {
-                    std::cout << "Player chose to buy a hotel for property: " << eligibleProperties[selectedPropertyIndex]->getName() << std::endl;
-                    if (eligibleProperties[selectedPropertyIndex]->buyHotel()) {
-                        currentPlayer.updateCashInHand(-eligibleProperties[selectedPropertyIndex]->getHotelCost());
-                        std::cout << "Hotel purchased for " << eligibleProperties[selectedPropertyIndex]->getName() << std::endl;
-                        menuWindow.close();
-                        return;
+                // Check if the cancel button is clicked
+                if (selectedIndex != -1 && cancelButton.getGlobalBounds().contains(mousePos)) {
+                    selectingProperty = true;
+                    selectedIndex = -1; // Deselect property
+                }
+
+                // Check if the buy house button is clicked
+                if (selectedIndex != -1 && buyHouseButton.getGlobalBounds().contains(mousePos)) {
+                    if (eligibleProperties[selectedIndex]->canBuildHouse() && currentPlayer.getCashInHand() >= eligibleProperties[selectedIndex]->getHouseCost()) {
+                        eligibleProperties[selectedIndex]->buyHouse();
+                        currentPlayer.updateCashInHand(-eligibleProperties[selectedIndex]->getHouseCost());
+                        currentPlayer.setTempMessage("House bought for " + eligibleProperties[selectedIndex]->getName());
                     } else {
-                        inputFeedback.setString("Cannot buy hotel. Maximum houses needed first.");
+                        currentPlayer.setTempMessage("Cannot build a house here.");
                     }
-                }
-            }
-
-            // Handling text input for property selection
-            if (event.type == sf::Event::TextEntered && isChoosingProperty) {
-                if (std::isdigit(event.text.unicode)) {
-                    input += static_cast<char>(event.text.unicode);
-                    inputFeedback.setString("Input: " + input);
+                    return;
                 }
 
-                // Check for backspace
-                if (event.text.unicode == 8 && !input.empty()) {
-                    input.pop_back();
-                    inputFeedback.setString("Input: " + input);
-                }
-
-                // Check for enter key
-                if (event.text.unicode == 13 && !input.empty()) {
-                    int index = std::stoi(input) - 1;
-                    if (index >= 0 && index < eligibleProperties.size()) {
-                        selectedPropertyIndex = index;
-                        validInput = true;
-                        isChoosingProperty = false;
-                        inputFeedback.setString("Selected: " + eligibleProperties[index]->getName());
-                        std::cout << "Player selected property: " << eligibleProperties[index]->getName() << std::endl;
+                // Check if the buy hotel button is clicked
+                if (selectedIndex != -1 && buyHotelButton.getGlobalBounds().contains(mousePos)) {
+                    if (eligibleProperties[selectedIndex]->canBuildHotel() && currentPlayer.getCashInHand() >= eligibleProperties[selectedIndex]->getHotelCost()) {
+                        eligibleProperties[selectedIndex]->buyHotel();
+                        currentPlayer.updateCashInHand(-eligibleProperties[selectedIndex]->getHotelCost());
+                        currentPlayer.setTempMessage("Hotel bought for " + eligibleProperties[selectedIndex]->getName());
                     } else {
-                        inputFeedback.setString("Invalid input. Enter valid index.");
-                        input.clear();
+                        currentPlayer.setTempMessage("Cannot build a hotel here.");
                     }
+                    return;
                 }
             }
         }
 
-        // Clear the window
-        menuWindow.clear(sf::Color(30, 30, 30));
+        // Draw the menu
+        window.clear(sf::Color(169, 169, 169));
+        window.draw(overlay);
 
-        // Draw all elements
-        menuWindow.draw(titleText);
-        menuWindow.draw(instructionText);
-        for (auto &propText : propertyTexts) {
-            menuWindow.draw(propText);
+        for (auto &text : propertyTexts) {
+            window.draw(text);
         }
 
-        menuWindow.draw(exitButton);
-        menuWindow.draw(exitButtonText);
+        // Draw buttons
+        window.draw(exitButton);
+        window.draw(exitButtonText);
 
-        if (validInput) {
-            menuWindow.draw(chooseHouseButton);
-            menuWindow.draw(chooseHouseText);
-            menuWindow.draw(chooseHotelButton);
-            menuWindow.draw(chooseHotelText);
+        if (selectedIndex != -1) {
+            window.draw(buyHouseButton);
+            window.draw(buyHouseText);
+            window.draw(buyHotelButton);
+            window.draw(buyHotelText);
+            window.draw(cancelButton);
+            window.draw(cancelText);
         }
 
-        menuWindow.draw(inputPrompt);
-        menuWindow.draw(inputFeedback);
-
-        // Display everything
-        menuWindow.display();
+        window.display();
     }
 }
-
 
 
 

@@ -40,3 +40,6 @@
 28	4750	7495137940697315	CMakeFiles/CL_Monopoly.dir/src/Board.cpp.obj	e15ef2df8c4e91f3
 2739	5065	7495137943897319	CMakeFiles/CL_Monopoly.dir/src/main.cpp.obj	b934b41ad624dd29
 5066	5672	7495137949927313	CL_Monopoly.exe	55a70a3dc6ca6f5b
+5	1590	7495145197545149	CMakeFiles/CL_Monopoly.dir/src/maingame.cpp.obj	ce8f515cf1b8a8ba
+6	1565	7495145662116721	CMakeFiles/CL_Monopoly.dir/src/maingame.cpp.obj	ce8f515cf1b8a8ba
+1566	2021	7495145666636227	CL_Monopoly.exe	55a70a3dc6ca6f5b
